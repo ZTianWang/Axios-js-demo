@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios Demo</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <select id="sid">
+        <option>profile</option>
+        <option>posts</option>
+        <option>comments</option>
+    </select>
+    <input type="text" id="inp">
+    <button id="btn">button</button>
+    <span id="box"></span>
+
+    <script>
+        var select = document.getElementById('sid')
+        var reqId = document.getElementById('inp')
+        var btn = document.getElementById('btn')
+        var box = document.getElementById('box')
+        var url = 'http://localhost:3000'
+        // btn.addEventListener('click',reqByGet)
+        btn.addEventListener('click',reqByPost)
+
+        function reqByGet() {
+            let type = select.options[select.selectedIndex].value
+            let id = reqId.value
+            axios.get(`${url}/${type}/${id}`).then(res => console.log(res))
+        }
+
+        function reqByPost() {
+            let type = select.options[select.selectedIndex].value
+            let id = parseInt(reqId.value)
+            let data = {
+                // id:id,
+                body:'comments test6',
+                postId: 4
+            }
+            // axios({
+            //     method:'POST',
+            //     url:'http://localhost:3000/posts',
+            //     data:data
+            // }).then(res => console.log(res))
+            axios.post(`${url}/${type}`,data).then(res => console.log(res))
+        }
+    </script>
+</body>
+
+</html>
